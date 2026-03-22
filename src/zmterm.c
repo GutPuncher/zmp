@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include <string.h>
 #include <cpm.h>
-#include <time.h>
 #include "zmp.h"
 
 #define autolen 6      /* length of ZRQINIT required for auto rx */
@@ -251,10 +250,9 @@ int c;
 static void prompt(clear)
 short clear;
 {
-   time_t tt;
-   struct tm *ptm;
+   char buf[6];
    char ampm;
-   int hh;
+   int hh,mm;
    
    if (clear) {
       cls();
@@ -265,9 +263,9 @@ short clear;
       Currdrive,Curruser,
       Baudtable[Current.cbaudindex]);
    if( ZsDos ) {
-      tt = time(NULL);
-      ptm = gmtime(&tt);
-      hh = ptm->tm_hour;
+      bdos(98, &buf);
+      hh = ((buf[3] >> 4 ) * 10) + (buf[3] & 0x0F);
+      mm = ((buf[4] >> 4 ) * 10) + (buf[4] & 0x0F);
       if (hh < 12) {
         ampm = 'A';
       } else {
@@ -277,7 +275,7 @@ short clear;
       if (!hh) {
          hh = 12;
       }
-      printf("\t\t%2d:%02d%cM",hh,ptm->tm_min,ampm);
+      printf("\t\t%2d:%02d%cM",hh,mm,ampm);
    }
    putchar('\n');
 }
@@ -380,4 +378,4 @@ static void adjustprthead()
 }
 
 /*         End of TERM module File 1         */
-
+
