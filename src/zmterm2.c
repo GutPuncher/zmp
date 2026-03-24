@@ -27,8 +27,9 @@ keydisp()
    cls();
    printf("\r\t\t");
    stndout();
-   printf(" KEYPAD MACRO LIST \n\n");
+   printf(" KEYPAD MACRO LIST ");
    stndend();
+   printf("\n\n");
    for (i=0; i<10; i++)
       printf("\t%d - %s\n",i,KbMacro[i]);
    printf("\n\n");
@@ -51,7 +52,7 @@ short flag;
       mcharout(CTRLS);
    }
    while (TxtPtr % 128) {
-      MainBuffer[TxtPtr++] = 0;
+      MainBuffer[TxtPtr++] = CR;
    }
    strcpy(Pathname,filename);
    addu(Pathname,Invokdrive,Invokuser);
@@ -486,4 +487,4 @@ void printfile()
 }
 
 /*         End of TERM module File 2         */
-
+

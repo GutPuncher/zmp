@@ -37,6 +37,10 @@ a few things that niggled at me:
   not overrun the remove system.
 * Long distance access code has been removed.
 * Quick dialing letters limited to A-T.
+* Keyboard macros can be chained with the # character, followed by
+  0-9. There's some rudimentary logic to prevent chaining to the
+  same macro number, but it's still quite easy to have one macro
+  chain to another which chains back to the original, so be careful!
 
 ## Status
 

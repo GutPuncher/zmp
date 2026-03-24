@@ -144,6 +144,7 @@
 #define	DONE		0xff	/*flag for no more entries*/
 #define	RET		'!'	/*symbol for CR string terminator */
 #define	WAITASEC	'~'	/* one second delay */
+#define FUNCKEY         '#'     /* chain to function key */
 #define	BIOSADDR	1	/*ptr to base of bios + 3*/
 #define	LISTST		42	/*index to list status routine*/
 #define	ENABLE		0xfb	/*code for EI*/
@@ -320,8 +321,7 @@ EXTERN int Inhost
 ;
 #ifdef INIT
 char Version[41]
-=  "Version 1.5+/- -- 24 July 2020"	/* version number for ZMP */
-=  "Version 1.5+/- -- 15 Aug 2023 "	/* version number for ZMP */
+=  "Version 1.5+/- -- 23 Mar 2026 "	/* version number for ZMP */
 /*  ^_____________________________________^		Maximum length! */
 #endif
 ;
@@ -506,4 +506,4 @@ struct dpb {
 EXTERN char **Pathlist;
 
 /******************************* end of zmp.h ******************************/
-
+

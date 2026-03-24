@@ -71,16 +71,26 @@ ovmain()
                kbdata = '\0';
                literal = TRUE;
             }
-         } else if (kbdata == RET ) {   /* Translate ! to CR */
-            if (!literal) {
+         } else if (!literal ) {
+            if( kbdata == RET) {   /* Translate ! to CR */
                kbdata = CR;
-            }
-            literal = FALSE;
-         } else if (kbdata == WAITASEC) {
-            if (!literal) {
+            } else if (kbdata == WAITASEC) {
                keywait = 1000;     /* handle pause */
                kbdata = '\0';      /* that's it for this loop */
+            } else if (kbdata == FUNCKEY && keycount ) {
+               kbdata = keybuf[keypoint];
+               if( kbdata >= '0' && kbdata <= '9' && kbdata != fkey ) {
+                  strcpy(keybuf,KbMacro[kbdata-'0']);
+                  keycount = strlen(keybuf);
+                  keypoint = 0;
+                  fkey = kbdata;
+               } else {
+                  --keycount;
+                  ++keypoint;
+               }
+               kbdata = '\0';
             }
+         } else {
             literal = FALSE;
          }
       }                         /* end of function keys */  
@@ -378,4 +388,4 @@ static void adjustprthead()
 }
 
 /*         End of TERM module File 1         */
-
+
